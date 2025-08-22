@@ -226,25 +226,30 @@ def api_send_message(chat_id):
         messages.append({"role": m["role"], "content": m["content"]})
 
     # Call OpenRouter (non-streaming)
-    headers = {
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        "Content-Type": "application/json",
-        "HTTP-Referer": SITE_URL,
-        "X-Title": APP_TITLE,
-    }
-    payload = {
-        "model": chat["model"],
-        "temperature": float(chat["temperature"] or 0.7),
-        "messages": messages
-    }
+    # Check if API key is loaded
+if not OPENROUTER_API_KEY:
+    return jsonify({"error": "No API key loaded on server!"}), 500
 
-    try:
-        r = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=payload, timeout=120)
-        r.raise_for_status()
-        data = r.json()
-        reply = data.get("choices",[{}])[0].get("message",{}).get("content","")
-    except Exception as e:
-        reply = f"⚠️ OpenRouter error: {e}"
+headers = {
+    "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+    "Content-Type": "application/json",
+    "Referer": SITE_URL,   # fixed here
+    "X-Title": APP_TITLE,
+}
+payload = {
+    "model": chat["model"],
+    "temperature": float(chat["temperature"] or 0.7),
+    "messages": messages
+}
+
+try:
+    r = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=payload, timeout=120)
+    r.raise_for_status()
+    data = r.json()
+    reply = data.get("choices", [{}])[0].get("message", {}).get("content", "")
+except Exception as e:
+    reply = f"⚠️ OpenRouter error: {e}"
+
 
     # Save assistant message and update chat
     conn = db()
