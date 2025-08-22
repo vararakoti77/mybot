@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">⚡ My Bot</div>
+    <div class="sidebar-top">
+      <button id="newChat" class="btn primary">+ New chat</button>
+      <a class="btn" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+    <div class="panel">
+      <label>Model</label>
+      <select id="model"></select>
+    </div>
+
+    <div class="panel">
+      <label>System prompt</label>
+      <textarea id="system" rows="4" placeholder="You are a helpful, concise AI assistant."></textarea>
+    </div>
+
+    <div class="panel">
+      <label>Temperature <span id="tempVal">0.7</span></label>
+      <input id="temperature" type="range" min="0" max="1" step="0.1" value="0.7"/>
+    </div>
+
+    <div class="panel">
+      <label>Conversations</label>
+      <div id="history" class="history"></div>
+    </div>
+
+    <div class="footer muted">Signed in • <a href="{{ url_for('logout') }}">Sign out</a></div>
+  </aside>
+
+  <main class="main">
+    <header class="header">
+      <div class="title" id="title">New chat</div>
+    </header>
+
+    <section id="chat" class="chat"></section>
+
+    <form id="composer" class="composer">
+      <textarea id="input" rows="1" placeholder="Message…"></textarea>
+      <button id="send" class="send" type="submit">Send</button>
+    </form>
+  </main>
+</div>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,44 @@
+:root{
+  --bg:#0b0e14; --panel:#0f131a; --panel2:#121826; --text:#eaeef5; --muted:#a8b3c7;
+  --accent:#50a8ff; --accent2:#7c5cff; --bot:#1a2030; --user:#1e2a3f; --border:rgba(255,255,255,.08);
+}
+*{box-sizing:border-box} html,body{height:100%}
+body{margin:0; background:#0b0e14; color:var(--text); font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Helvetica Neue,Arial}
+a{color:var(--accent); text-decoration:none}
+.muted{color:var(--muted)}
+.alert{background:#3a1e1e; border:1px solid #7a3a3a; padding:10px; border-radius:10px; margin-bottom:10px}
+/* Auth */
+.auth-wrap{display:flex; align-items:center; justify-content:center; height:100vh; padding:16px}
+.auth-card{background:linear-gradient(180deg,var(--panel),var(--panel2)); border:1px solid var(--border); border-radius:16px; padding:24px; width:100%; max-width:420px}
+.auth-card h1{margin:0 0 12px 0}
+.auth-card form{display:flex; flex-direction:column; gap:10px}
+.auth-card input{padding:10px; border-radius:10px; border:1px solid var(--border); background:#0f1524; color:var(--text)}
+.auth-card button{padding:10px; border:none; border-radius:10px; background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#fff; font-weight:700; cursor:pointer}
+/* App */
+.app{display:flex; height:100vh; width:100%}
+.sidebar{width:300px; min-width:260px; background:linear-gradient(180deg,var(--panel),var(--panel2)); border-right:1px solid var(--border); padding:16px; display:flex; flex-direction:column; gap:14px}
+.brand{font-weight:700; letter-spacing:.2px}
+.btn{background:transparent; border:1px solid var(--border); color:var(--text); border-radius:10px; padding:8px 10px; cursor:pointer}
+.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#fff; border:none}
+.sidebar-top{display:flex; gap:8px}
+.panel{display:flex; flex-direction:column; gap:8px; background:rgba(255,255,255,.02); border:1px solid var(--border); padding:12px; border-radius:14px}
+.panel label{font-size:12px; color:var(--muted)}
+.panel select,.panel textarea,.panel input[type="range"]{width:100%; background:#0f1524; color:var(--text); border:1px solid var(--border); outline:none; border-radius:10px; padding:10px}
+.history{flex:1; overflow:auto; display:flex; flex-direction:column; gap:8px; margin-top:6px}
+.chat-link{display:block; width:100%; text-align:left; background:transparent; border:1px solid var(--border); color:var(--text); padding:10px; border-radius:10px; cursor:pointer}
+.chat-link.active{outline:2px solid var(--accent); border-color:transparent}
+.main{flex:1; display:flex; flex-direction:column; min-width:0}
+.header{height:56px; border-bottom:1px solid var(--border); display:flex; align-items:center; padding:0 16px; background:rgba(0,0,0,.2); backdrop-filter:blur(6px); position:sticky; top:0; z-index:5}
+.title{font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.chat{padding:20px; display:flex; flex-direction:column; gap:16px; overflow:auto; height:calc(100vh - 56px - 76px)}
+.bubble{display:flex; gap:12px; max-width:900px; padding:16px; border:1px solid var(--border); border-radius:18px; box-shadow:0 6px 20px rgba(0,0,0,.15); animation:pop .12s ease-out; white-space:pre-wrap; word-wrap:break-word}
+@keyframes pop{from{transform:scale(.98);opacity:.5}to{transform:scale(1);opacity:1}}
+.bubble.user{background:var(--user); align-self:flex-end}
+.bubble.assistant{background:var(--bot); align-self:flex-start}
+.role{min-width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff}
+.role.user{background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.role.assistant{background:linear-gradient(135deg,#00c2ff,#0076ff)}
+.content{flex:1}
+.composer{display:flex; gap:8px; align-items:flex-end; border-top:1px solid var(--border); padding:10px; background:rgba(0,0,0,.25)}
+.composer textarea{flex:1; min-height:44px; max-height:200px; border:1px solid var(--border); background:#0f1524; color:var(--text); border-radius:12px; padding:12px; resize:vertical; outline:none}
+.send{background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#fff; border:none; border-radius:12px; padding:10px 14px; cursor:pointer; font-weight:700}
